@@ -109,10 +109,7 @@ class UserController extends Controller
 
         $validation = Validator::make($request->all(), [
             'name' => 'required',
-            'email' => 'required|unique:users,email',
-            'phone' => 'required|min:11|max:11|unique:users,phone',
             'gender' => 'required',
-            'password' => 'required',
 
         ]);
 
@@ -131,9 +128,7 @@ class UserController extends Controller
 
             $user->update([
                 'name' => $request->name,
-                'email' => $request->email,
-                'phone' => $request->phone,
-                'gender' => $request->gender,
+                'gender' => strtolower($request->gender),
                 'image' => $request->image,
                 'password' => bcrypt($request->password),
             ]);
